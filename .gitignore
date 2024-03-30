@@ -1,0 +1,17 @@
+# Emacs files
+*~
+
+# Editor
+.idea/
+*.iml
+
+# Mac Os
+.DS_Store
+
+# Python
+*.pyc
+__pycache__
+
+# Project related
+config/
+.cache/

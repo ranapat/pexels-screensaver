@@ -1,0 +1,27 @@
+[ACCOUNT]
+api_key = <your api key>
+
+[SCREEN]
+width = 1920
+height = 1080
+
+[BEHAVIOUR]
+slide_duration = 15000
+max_slides_from_genre = 50
+
+[GENRES]
+favourites = astro, lifestyle, ocean, abstract, nature, art, animals, paintings, world, random
+
+[KEYS]
+genre = ##genre##
+width = ##width##
+height = ##height##
+id = ##id##
+
+[REST]
+header_authorization_key = Authorization
+query_genre = https://api.pexels.com/v1/search?query=##genre##
+full_image_suffix = ?auto=compress&cs=tinysrgb&fit=crop&w=##width##&h=##height##
+
+[CACHE]
+local_path = ./.cache/##id##.jpeg
