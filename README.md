@@ -45,6 +45,11 @@ or
 favourites = astro,lifestyle,ocean,       abstract,        nature,art,animals,paintings,world, random
 ```
 
+- Adjust genre randomisation
+```
+randomise_genres = true
+```
+
 - Install the dependencies manually or use the pipenv
 
 ## Get api_key

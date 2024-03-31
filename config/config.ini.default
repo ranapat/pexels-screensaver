@@ -8,6 +8,7 @@ height = 1080
 [BEHAVIOUR]
 slide_duration = 15000
 max_slides_from_genre = 50
+randomise_genres = true
 
 [GENRES]
 favourites = astro, lifestyle, ocean, abstract, nature, art, animals, paintings, world, random

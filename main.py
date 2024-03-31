@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 import os
-import requests
-import urllib.parse
+import random
 import shutil
+import urllib.parse
+
 import cv2
+import requests
 
 from config.Config import Config
 
@@ -76,6 +78,8 @@ def __show_full_screen_image(image):
 
 if __name__ == '__main__':
     genres = _config.genres_favourites
+    if _config.behaviour_randomise_genres:
+        random.shuffle(genres)
     items_from_genres = _config.behaviour_max_slides_from_genre
     rest_query_genre = _config.rest_query_genre
     rest_full_image_suffix = _config.rest_full_image_suffix

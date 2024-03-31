@@ -22,6 +22,7 @@ class Config:
 
             cls._instance.behaviour_slide_duration = int(config['BEHAVIOUR']['slide_duration'])
             cls._instance.behaviour_max_slides_from_genre = int(config['BEHAVIOUR']['max_slides_from_genre'])
+            cls._instance.behaviour_randomise_genres = True if config['BEHAVIOUR']['randomise_genres'].strip().lower() == 'true' else False
 
             cls._instance.genres_favourites = list(map(str.strip, config['GENRES']['favourites'].split(',')))
 
