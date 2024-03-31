@@ -23,6 +23,8 @@ class Config:
             cls._instance.behaviour_slide_duration = int(config['BEHAVIOUR']['slide_duration'])
             cls._instance.behaviour_max_slides_from_genre = int(config['BEHAVIOUR']['max_slides_from_genre'])
             cls._instance.behaviour_randomise_genres = True if config['BEHAVIOUR']['randomise_genres'].strip().lower() == 'true' else False
+            cls._instance.behaviour_use_average_color = True if config['BEHAVIOUR']['use_average_color'].strip().lower() == 'true' else False
+            cls._instance.behaviour_fallback_fill_color = config['BEHAVIOUR']['fallback_fill_color']
 
             cls._instance.genres_favourites = list(map(str.strip, config['GENRES']['favourites'].split(',')))
 
@@ -36,5 +38,6 @@ class Config:
             cls._instance.rest_full_image_suffix = config['REST']['full_image_suffix']
 
             cls._instance.cache_local_path = config['CACHE']['local_path']
+            cls._instance.cache_fit_local_path = config['CACHE']['fit_local_path']
 
         return cls._instance

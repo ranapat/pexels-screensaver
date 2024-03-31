@@ -9,6 +9,8 @@ height = 1080
 slide_duration = 15000
 max_slides_from_genre = 50
 randomise_genres = true
+use_average_color = true
+fallback_fill_color = #000000
 
 [GENRES]
 favourites = astro, lifestyle, ocean, abstract, nature, art, animals, paintings, world, random
@@ -22,7 +24,8 @@ id = ##id##
 [REST]
 header_authorization_key = Authorization
 query_genre = https://api.pexels.com/v1/search?query=##genre##
-full_image_suffix = ?auto=compress&cs=tinysrgb&fit=crop&w=##width##&h=##height##
+full_image_suffix = ?auto=compress&cs=tinysrgb&__fit=crop&w=##width##&h=##height##
 
 [CACHE]
 local_path = ./.cache/##id##.jpeg
+fit_local_path = ./.cache/fit_##id##.jpeg

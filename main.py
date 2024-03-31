@@ -7,6 +7,7 @@ import urllib.parse
 
 import cv2
 import requests
+from PIL import Image, ImageColor
 
 from config.Config import Config
 
@@ -61,12 +62,24 @@ def __persist_url(remote, local):
         shutil.copyfileobj(r.raw, out_file)
 
 
-def __show_full_screen_image(image):
-    img = cv2.imread(image)
-    img = cv2.resize(img, (_config.screen_width, _config.screen_height), interpolation=cv2.INTER_CUBIC)
+def __fit_persisted_file(image_path, image_fit_path, image_average_color):
+    print(f'### [ Resizing ] {image_path} to {image_fit_path} with average color {image_average_color}')
+
+    image = Image.open(image_path)
+    image_width, image_height = image.size
+    image_fill_color = ImageColor.getrgb(image_average_color)
+    new_image = Image.new('RGBA', (_config.screen_width, _config.screen_height), image_fill_color)
+    new_image.paste(image, (int((_config.screen_width - image_width) / 2), int((_config.screen_height - image_height) / 2)))
+
+    rgb_new_image = new_image.convert('RGB')
+    rgb_new_image.save(image_fit_path)
+
+
+def __show_full_screen_image(image_fit_path):
+    final_image = cv2.imread(image_fit_path)
     cv2.namedWindow("Pexels Preview", cv2.WINDOW_FULLSCREEN)
     cv2.setWindowProperty("Pexels Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-    cv2.imshow("Pexels Preview", img)
+    cv2.imshow("Pexels Preview", final_image)
 
     key = cv2.waitKey(_config.behaviour_slide_duration)
 
@@ -84,6 +97,7 @@ if __name__ == '__main__':
     rest_query_genre = _config.rest_query_genre
     rest_full_image_suffix = _config.rest_full_image_suffix
     cache_local_path = _config.cache_local_path
+    cache_fit_local_path = _config.cache_fit_local_path
     key_genre = _config.keys_genre
     keys_width = _config.keys_width
     keys_height = _config.keys_height
@@ -107,19 +121,33 @@ if __name__ == '__main__':
         while image_index_global < items_from_genres:
             print(f'### [ {genre} ] opening {image_index_global} :: {image_index} from {items_from_genres} :: {images_length}')
             if image_index < images_length:
-                image_id = images[image_index]['id']
-                source = images[image_index]['src']['original'] + rest_full_image_suffix \
-                    .replace(keys_width, str(width)) \
-                    .replace(keys_height, str(height))
+                image = images[image_index]
+                image_id = image['id']
+                image_width = image['width']
+                image_height = image['height']
+                image_average_color = image['avg_color'] if _config.behaviour_use_average_color else _config.behaviour_fallback_fill_color
+
+                if image_width > image_height:
+                    desired_width = width
+                    desired_height = desired_width * image_height / image_width
+                else:
+                    desired_height = height
+                    desired_width = desired_height * image_width / image_height
+
+                source = image['src']['original'] + rest_full_image_suffix \
+                    .replace(keys_width, str(desired_width)) \
+                    .replace(keys_height, str(desired_height))
                 image_index = image_index + 1
                 image_index_global = image_index_global + 1
 
                 destination = cache_local_path.replace(keys_id, str(image_id))
+                fit_destination = cache_fit_local_path.replace(keys_id, str(image_id))
 
                 if not os.path.exists(destination):
                     __persist_url(source, destination)
+                    __fit_persisted_file(destination, fit_destination, image_average_color)
 
-                if __show_full_screen_image(destination):
+                if __show_full_screen_image(fit_destination):
                     exit(1)
             elif 'next_page' in response:
                 print(f'### [ {genre} ] loading next page')

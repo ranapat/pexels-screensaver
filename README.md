@@ -27,7 +27,6 @@ height = 1080
 
 `max_slides_from_genre` will define how many images to play from one genre before moving to the next one
 ```
-[BEHAVIOUR]
 slide_duration = 15000
 max_slides_from_genre = 50
 ```
@@ -36,18 +35,25 @@ max_slides_from_genre = 50
 
 Values are csv - space after coma is not required
 ```
-[GENRES]
 favourites = astro, lifestyle, ocean, abstract, nature, art, animals, paintings, world, random
 ```
 or
 ```
-[GENRES]
 favourites = astro,lifestyle,ocean,       abstract,        nature,art,animals,paintings,world, random
 ```
 
 - Adjust genre randomisation
 ```
 randomise_genres = true
+```
+
+- Pick how you fill the screen
+
+To fit images without cutting then out pill color fills the blank.
+You can use the average color `avg_color` from Pexels.com or define your own.
+```
+use_average_color = true | false
+fallback_fill_color = #000000
 ```
 
 - Install the dependencies manually or use the pipenv
