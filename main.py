@@ -57,6 +57,8 @@ def __get_response(path: str, parameters: dict[str, str] = {}, headers: dict[str
 
 
 def __persist_url(remote, local):
+    print(f'### [ Saving ] {remote} to {local}')
+
     r = requests.get(remote, headers=__normalize_headers({}), stream=True)
     with open(local, "wb") as out_file:
         shutil.copyfileobj(r.raw, out_file)
