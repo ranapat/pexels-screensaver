@@ -23,7 +23,7 @@ id = ##id##
 
 [REST]
 header_authorization_key = Authorization
-query_genre = https://api.pexels.com/v1/search?query=##genre##
+query_genre = https://api.pexels.com/v1/search?query=##genre##&sort
 full_image_suffix = ?auto=compress&cs=tinysrgb&__fit=crop&w=##width##&h=##height##
 
 [CACHE]
