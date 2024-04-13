@@ -184,7 +184,7 @@ class Runner:
     def _show_image(self):
         image = self._add_time_to_current_image()
         if image is not None:
-            cv2.destroyWindow("Pexels Preview")
+            # cv2.destroyWindow("Pexels Preview")
 
             cv2.namedWindow("Pexels Preview", cv2.WINDOW_FULLSCREEN)
             cv2.setWindowProperty("Pexels Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
