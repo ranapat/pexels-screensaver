@@ -33,6 +33,7 @@ class Config:
             cls._instance.watch_offset_bottom_right_x = int(config['WATCH']['offset_bottom_right_x'])
             cls._instance.watch_offset_bottom_right_y = int(config['WATCH']['offset_bottom_right_y'])
             cls._instance.watch_offset_shadow = int(config['WATCH']['offset_shadow'])
+            cls._instance.watch_max_random_offset_jump = int(config['WATCH']['max_random_offset_jump'])
 
             cls._instance.keys_genre = config['KEYS']['genre']
             cls._instance.keys_width = config['KEYS']['width']

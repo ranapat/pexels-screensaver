@@ -1,7 +1,7 @@
 import copy
 import os
-import random
 import time
+import random
 from enum import Enum
 from threading import Event
 
@@ -155,13 +155,19 @@ class Runner:
 
             screen_width = self._config.screen_width
             screen_height = self._config.screen_height
+            random_offset_jump = random.randint(
+                -self._config.watch_max_random_offset_jump,
+                self._config.watch_max_random_offset_jump
+            )
+            screen_offset_x = self._config.watch_offset_bottom_right_x + random_offset_jump
+            screen_offset_y = self._config.watch_offset_bottom_right_y + random_offset_jump
             position_gray = (
-                screen_width - self._config.watch_offset_bottom_right_x - self._config.watch_offset_shadow,
-                screen_height - self._config.watch_offset_bottom_right_y - self._config.watch_offset_shadow
+                screen_width - screen_offset_x - self._config.watch_offset_shadow,
+                screen_height - screen_offset_y - self._config.watch_offset_shadow
             )
             position_white = (
-                screen_width - self._config.watch_offset_bottom_right_x,
-                screen_height - self._config.watch_offset_bottom_right_y
+                screen_width - screen_offset_x,
+                screen_height - screen_offset_y
             )
 
             self._current_time = self._get_time_as_string()
