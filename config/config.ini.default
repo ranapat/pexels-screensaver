@@ -21,6 +21,7 @@ font_thickness = 2
 offset_bottom_right_x = 200
 offset_bottom_right_y = 200
 offset_shadow = 3
+max_random_offset_jump = 50
 
 [KEYS]
 genre = ##genre##
