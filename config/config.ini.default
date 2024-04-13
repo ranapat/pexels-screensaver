@@ -15,6 +15,13 @@ fallback_fill_color = #000000
 [GENRES]
 favourites = astro, lifestyle, ocean, abstract, nature, art, animals, paintings, world, random
 
+[WATCH]
+font_scale = 2
+font_thickness = 2
+offset_bottom_right_x = 200
+offset_bottom_right_y = 200
+offset_shadow = 3
+
 [KEYS]
 genre = ##genre##
 width = ##width##
