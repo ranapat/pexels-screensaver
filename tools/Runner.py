@@ -93,6 +93,8 @@ class Runner:
 
         if self._current_image_genre_index >= config.behaviour_max_slides_from_genre:
             self._action = Action.LOAD_GENRE
+        elif len(self._current_images) == 0:
+            self._action = Action.LOAD_GENRE
         elif (self._current_image_index >= len(self._current_images)) and ('next_page' in self._current_genre_response):
             print(f'### [ {self._current_genres[self._current_genre_index]} ] loading next page')
             self._current_genre_response = self._api.get_json(self._current_genre_response['next_page'])
