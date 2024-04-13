@@ -56,6 +56,19 @@ use_average_color = true | false
 fallback_fill_color = #000000
 ```
 
+- Define the watch
+
+```
+[WATCH]
+enabled = true
+font_scale = 2
+font_thickness = 2
+offset_bottom_right_x = 200
+offset_bottom_right_y = 200
+offset_shadow = 3
+max_random_offset_jump = 50
+```
+
 - Install the dependencies manually or use the pipenv
 
 ## Get api_key

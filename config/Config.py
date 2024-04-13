@@ -28,6 +28,7 @@ class Config:
 
             cls._instance.genres_favourites = list(map(str.strip, config['GENRES']['favourites'].split(',')))
 
+            cls._instance.watch_enabled = True if config['WATCH']['enabled'].strip().lower() == 'true' else False
             cls._instance.watch_font_scale = float(config['WATCH']['font_scale'])
             cls._instance.watch_font_thickness = int(config['WATCH']['font_thickness'])
             cls._instance.watch_offset_bottom_right_x = int(config['WATCH']['offset_bottom_right_x'])

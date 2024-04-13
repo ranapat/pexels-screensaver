@@ -62,7 +62,7 @@ class Runner:
                 self.stop()
 
             if not self._check_for_escape() and action == Action.NOTHING:
-                if self._current_time != self._get_time_as_string():
+                if self._config.watch_enabled and (self._current_time != self._get_time_as_string()):
                     print(f'... change timer with +1 minute ...')
                     self._action = Action.CHANGE_TIME
 
@@ -188,7 +188,7 @@ class Runner:
         return time.strftime("%H:%M")
 
     def _show_image(self):
-        image = self._add_time_to_current_image()
+        image = self._add_time_to_current_image() if self._config.watch_enabled else self._current_image
         if image is not None:
             # cv2.destroyWindow("Pexels Preview")
 
