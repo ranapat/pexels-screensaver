@@ -28,6 +28,12 @@ class Config:
 
             cls._instance.genres_favourites = list(map(str.strip, config['GENRES']['favourites'].split(',')))
 
+            cls._instance.watch_font_scale = float(config['WATCH']['font_scale'])
+            cls._instance.watch_font_thickness = int(config['WATCH']['font_thickness'])
+            cls._instance.watch_offset_bottom_right_x = int(config['WATCH']['offset_bottom_right_x'])
+            cls._instance.watch_offset_bottom_right_y = int(config['WATCH']['offset_bottom_right_y'])
+            cls._instance.watch_offset_shadow = int(config['WATCH']['offset_shadow'])
+
             cls._instance.keys_genre = config['KEYS']['genre']
             cls._instance.keys_width = config['KEYS']['width']
             cls._instance.keys_height = config['KEYS']['height']
