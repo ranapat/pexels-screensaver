@@ -16,6 +16,7 @@ fallback_fill_color = #000000
 favourites = astro, lifestyle, ocean, abstract, nature, art, animals, paintings, world, random
 
 [WATCH]
+enabled = true
 font_scale = 2
 font_thickness = 2
 offset_bottom_right_x = 200
