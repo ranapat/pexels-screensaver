@@ -27,7 +27,7 @@ height = 1080
 
 `max_slides_from_genre` will define how many images to play from one genre before moving to the next one
 ```
-slide_duration = 15000
+slide_duration = 15
 max_slides_from_genre = 50
 ```
 
