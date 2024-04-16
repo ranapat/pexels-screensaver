@@ -23,7 +23,7 @@ height = 1080
 
 - Adjust how long each slide shall stay and how many items per genre you prefer
 
-`slide_duration` is in milliseconds
+`slide_duration` is in seconds
 
 `max_slides_from_genre` will define how many images to play from one genre before moving to the next one
 ```

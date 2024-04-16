@@ -38,6 +38,7 @@ class Runner:
         self._current_image_index = 0
         self._current_image_genre_index = 0
         self._current_image = None
+        self._current_image_set_at = None
         self._current_time = None
 
     def start(self):
@@ -62,8 +63,9 @@ class Runner:
                 self.stop()
 
             if not self._check_for_escape() and action == Action.NOTHING:
-                if self._config.watch_enabled and (self._current_time != self._get_time_as_string()):
-                    print(f'... change timer with +1 minute ...')
+                if (time.time() - self._current_image_set_at) >= self._config.behaviour_slide_duration:
+                    self._action = Action.LOAD_IMAGE
+                elif self._config.watch_enabled and (self._current_time != self._get_time_as_string()):
                     self._action = Action.CHANGE_TIME
 
     def _load_genre(self):
@@ -147,6 +149,7 @@ class Runner:
 
     def _show_full_screen_image(self, image_fit_path):
         self._current_image = cv2.imread(image_fit_path)
+        self._current_image_set_at = time.time()
         self._show_image()
 
     def _add_time_to_current_image(self):
