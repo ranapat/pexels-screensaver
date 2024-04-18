@@ -1,11 +1,12 @@
 import copy
 import os
-import time
 import random
+import time
 from enum import Enum
 from threading import Event
 
 import cv2
+from PIL import UnidentifiedImageError
 
 from tools.Images import Images
 from tools.RestApi import RestApi
@@ -124,9 +125,26 @@ class Runner:
             destination = config.cache_local_path.replace(config.keys_id, str(image_id))
             fit_destination = config.cache_fit_local_path.replace(config.keys_id, str(image_id))
 
-            if not os.path.exists(destination):
-                self._api.persist(source, destination)
-                self._images.fill_with_color(destination, fit_destination, image_average_color)
+            try:
+                if not os.path.exists(destination):
+                    self._api.persist(source, destination)
+                if not os.path.exists(fit_destination):
+                    self._images.fill_with_color(destination, fit_destination, image_average_color)
+            except UnidentifiedImageError:
+                print(f'### [ Runner ] image handling failed, removing local cache and trying again')
+
+                try:
+                    os.remove(destination)
+                except OSError:
+                    pass
+
+                try:
+                    os.remove(fit_destination)
+                except OSError:
+                    pass
+
+                self._action = Action.LOAD_IMAGE
+                return None
 
             self._show_full_screen_image(fit_destination)
 
